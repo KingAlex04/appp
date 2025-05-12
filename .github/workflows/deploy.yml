@@ -1,0 +1,71 @@
+name: Deploy Staff Tracker Backend
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'TrackerApp/backend/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TrackerApp/backend
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: 'TrackerApp/backend/package-lock.json'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Create reports directory
+      run: mkdir -p reports
+    
+    - name: Create mock Firebase service account for testing
+      run: |
+        echo '{
+          "type": "service_account",
+          "project_id": "mock-project",
+          "private_key_id": "mock-key-id",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCMk7BsS4A1/1YC\nuKaRD9A3MJZx532sZcZgKJUZzp2DrQVFLIHUlJjsXIaGwfeBbv5H0qxGfFDGDO9S\nQZiPGc5monLC1wGk7ElyYZ3RHQQVBx/oi0l0U8G9QvWB0SO1GRnBGT/z6ztlg44J\nWC3j7gLpDHk+QEGfCbU842C4GkG4RJdPvbm6nwVrLIIKhk1LWp507DvSV96s39Xz\nUxwdMSYqwMcMJcRH+C1DR90YqoLLUOzGRWaDj1/lSX62LMJk9aDZzMgFJbI0I8tI\nYTp1wIIMad1hURJcXqhfk9CvPloj6O3nqkXN5VbqRcxLzKGn+Vz4aAUh8/rVW3yt\n2fvdxzibAgMBAAECggEADNvsIo/3OcTz3UIGmXeUENl03Bf6B5UxzE5T0gqMlQVG\nqt4PdVomXxCTsjxnvGz6H+vX5mLJM1kXRvFsbzJkdOh0QyCvRNEEqSJXcrUL9J9k\n5+yLCZqfT9WQ58GImy3g8R/4zOcYCyjqQLSuXR/3XNx6LBCu4O9p57QBIrRfTCIx\nTzQiOOhigGKXkl4nYz3bYQe/Rxxag94/1ksdkXkCuSLwYHokS0ewHgak7Hdwp+cP\nAUQZ2Xt/gOnGsnGQBG6TvCdyZULcgZxGLFkPQKfk1qlc2BDAP0MY+l4dGzebWV/T\nNK2fGQCIFwZHp7TIXWxITjRxLG8VemXcCbNTYYqOuQKBgQDBH5QKv6tM1xhfKnZU\nKs+QzbNI8Lj9vk8QrJUkQj8IHqRNP1GlmJZQMBQbmlLpuG9GsX40Z/Tq9IgRKXkl\no2JMXmNYl8HD5bxPAL+/0FB0IiKpDV5V4aPWDLWkURaSYY4ZCUDVdqiLV3unTgwJ\nDGplG2QJ5RNkV6U53eHExmYPVQKBgQC5wDvVOv0GL5BtLn0J/3V3bIUioyHI9xV2\nPpR+4y8CueaYZZX1jvs+IdVjzxQlZwNyBpQciFTCEiA//SttSvJhcmxTHWwPmaFR\n3lxf3qBPgc73pkx5GAMk7YmVi+i/DkZSPGuHNz/LsGXVvNUGdOi+H/BKsB+VTxHS\nf+xlBtkpTwKBgD0k9TuUeJvV/HeFShQfT6ZG2fJbS+3J01TaoUJlL9ftgGapRYwO\nLZbMNIKrUxl42v7VDnZ3ArKKzB1WW1XZzFRnns4Tc7qTJE8u5mFN3Tg/apI2BBK3\nDgFnHySTKGBjm88+lSG1jOEBgMEKf+DVvEIcQVgpHhQn2hgZ9eW3UEsdAoGAL/4C\nqtdghs2FAYFmw3CmLzTARlFgKWnCPClwXxBRY4bK0OqiCixsiUWNP5lJCpGwSvmS\nL0Vm4d39xq42x6Z8MbsqUQKz6gN6/oYZAwS4RH0nQJvRfNDYHYv/spKHLVG+oFUz\n2QLj9IH6doeB8AR8JDgKSBjbD0QaRp5jYVQXVr0CgYATtNmL2wSA/jxvytTMfNwE\nltdMmP7IlwH5ZRuRsvxJkt9ni4nv9Y/mWkVNbLnFmfNRQJT3Z4p+QWwX6FVr9hou\ngbI8+1nL0CBZUkqzpvYGUB0tdQnNLZ51mTu8mDFk2/eeM5DiU9PPC/dAkQXrKGOc\n9I8XnP7+gOvBmL/fYkEgWg==\n-----END PRIVATE KEY-----\n",
+          "client_email": "mock@example.com",
+          "client_id": "mock-client-id",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mock@example.com"
+        }' > serviceAccountKey.json
+    
+    - name: Create .env file
+      run: |
+        echo "PORT=3000" > .env
+        echo "NODE_ENV=test" >> .env
+        echo "JWT_SECRET=test_secret_key" >> .env
+    
+    - name: Test startup
+      run: node -e "require('./index.js'); console.log('Server loaded successfully');"
+
+  deploy-render:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Render
+      # This step uses Render's webhook deployment feature
+      # You need to create a deploy hook in Render dashboard and add it as a secret
+      run: |
+        if [ -n "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" ]; then
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          echo "Triggered deploy webhook for Render"
+        else
+          echo "No Render deploy hook URL found in secrets"
+          echo "Please configure RENDER_DEPLOY_HOOK_URL in your repository secrets"
+          echo "Learn more at https://render.com/docs/deploy-hooks"
+        fi 

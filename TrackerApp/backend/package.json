@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Staff Tracker Backend for Report Generation",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "mkdir -p reports"
   },
   "keywords": [
     "firebase",
@@ -14,7 +18,7 @@
     "express",
     "reports"
   ],
-  "author": "",
+  "author": "KingAlex04",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -22,7 +26,9 @@
     "excel4node": "^1.8.0",
     "express": "^4.18.2",
     "firebase-admin": "^11.7.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "jsonwebtoken": "^9.0.0",
+    "bcrypt": "^5.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

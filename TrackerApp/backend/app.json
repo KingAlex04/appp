@@ -1,0 +1,21 @@
+{
+  "name": "Staff Tracker API",
+  "description": "Backend API for the Staff Tracker application with report generation capabilities",
+  "repository": "https://github.com/KingAlex04/appp",
+  "keywords": ["node", "express", "firebase", "staff", "tracking"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment (development, production)",
+      "value": "production"
+    },
+    "JWT_SECRET": {
+      "description": "Secret for JWT token generation",
+      "generator": "secret"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+} 
