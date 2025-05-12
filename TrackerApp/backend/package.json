@@ -1,0 +1,30 @@
+{
+  "name": "staff-tracker-backend",
+  "version": "1.0.0",
+  "description": "Staff Tracker Backend for Report Generation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firebase",
+    "node",
+    "express",
+    "reports"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "excel4node": "^1.8.0",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.7.0",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+} 

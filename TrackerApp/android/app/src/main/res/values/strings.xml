@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Staff Tracker</string>
+    
+    <!-- Auth Strings -->
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_failed">Login failed. Please check your credentials</string>
+    
+    <!-- Admin Strings -->
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="add_staff">Add Staff</string>
+    <string name="edit_staff">Edit Staff</string>
+    <string name="active_staff">Active Staff</string>
+    <string name="reports">Reports</string>
+    <string name="logout">Logout</string>
+    <string name="staff_name">Name</string>
+    <string name="staff_email">Email</string>
+    <string name="staff_contact">Contact Number</string>
+    <string name="staff_blood_group">Blood Group</string>
+    <string name="staff_address">Address</string>
+    <string name="staff_photo">Photo</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="report_type">Report Type</string>
+    <string name="report_period">Report Period</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="quarterly">Quarterly</string>
+    <string name="yearly">Yearly</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="download_report">Download Report</string>
+    
+    <!-- User Strings -->
+    <string name="staff_dashboard">Staff Dashboard</string>
+    <string name="welcome">Welcome</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="tracking_active">Location tracking is active</string>
+    <string name="permission_required">Location permission is required for check-in</string>
+    <string name="permission_background_required">Background location permission is required for tracking</string>
+    
+    <!-- Service Notifications -->
+    <string name="tracking_notification_title">Staff Tracker Active</string>
+    <string name="tracking_notification_text">Your location is being tracked</string>
+    <string name="tracking_notification_channel">Location Tracking</string>
+</resources> 
